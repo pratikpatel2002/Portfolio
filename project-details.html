@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Details - Pratik Patel</title>
+    <meta name="description" content="Project details and information">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .project-details-page {
+            padding: 100px 0 80px;
+            min-height: 100vh;
+        }
+
+        .project-details-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            transform: translateX(-5px);
+        }
+
+        .back-button i {
+            font-size: 14px;
+        }
+
+        .project-details-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+        }
+
+        .project-details-header {
+            padding: 40px 40px 30px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .project-details-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--text-primary);
+        }
+
+        .project-tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .tech-tag {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .project-details-body {
+            padding: 40px;
+        }
+
+        .project-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 35px;
+        }
+
+        .project-features {
+            margin-bottom: 35px;
+        }
+
+        .project-features h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+        }
+
+        .project-features ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .project-features li {
+            padding: 12px 0;
+            position: relative;
+            padding-left: 30px;
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .project-features li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .project-link {
+            padding: 14px 28px;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .project-link:hover {
+            background-color: #2563eb;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px -3px rgba(59, 130, 246, 0.3);
+        }
+
+        .project-link i {
+            font-size: 16px;
+        }
+
+        .project-link.secondary {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .project-link.secondary:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .loading-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-secondary);
+        }
+
+        .error-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-secondary);
+        }
+
+        .error-state h2 {
+            color: var(--text-primary);
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .project-details-page {
+                padding: 90px 0 60px;
+            }
+
+            .project-details-header {
+                padding: 30px 25px 20px;
+            }
+
+            .project-details-header h1 {
+                font-size: 2rem;
+            }
+
+            .project-details-body {
+                padding: 30px 25px;
+            }
+
+            .project-description {
+                font-size: 1rem;
+            }
+
+            .project-features h2 {
+                font-size: 1.3rem;
+            }
+
+            .project-links {
+                flex-direction: column;
+            }
+
+            .project-link {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .project-details-header {
+                padding: 25px 20px 15px;
+            }
+
+            .project-details-header h1 {
+                font-size: 1.7rem;
+            }
+
+            .project-details-body {
+                padding: 25px 20px;
+            }
+
+            .project-tech-tags {
+                gap: 8px;
+            }
+
+            .tech-tag {
+                font-size: 0.8rem;
+                padding: 5px 12px;
+            }
+
+            .project-features li {
+                font-size: 0.95rem;
+                padding-left: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <h2><a href="index.html" style="text-decoration: none; color: inherit;">Pratik Patel</a></h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html#home">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#skills">Skills</a></li>
+                <li><a href="index.html#achievements">Achievements</a></li>
+                <li><a href="index.html#projects">Projects</a></li>
+                <li><a href="index.html#testimonials">Testimonials</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Theme Toggle -->
+    <button class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon"></i>
+        <i class="fas fa-sun"></i>
+    </button>
+
+    <!-- Project Details Section -->
+    <section class="project-details-page">
+        <div class="project-details-container">
+            <a href="index.html#projects" class="back-button">
+                <i class="fas fa-arrow-left"></i>
+                Back to Projects
+            </a>
+
+            <div id="projectContent">
+                <div class="loading-state">
+                    <i class="fas fa-spinner fa-spin" style="font-size: 2rem; margin-bottom: 15px;"></i>
+                    <p>Loading project details...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2024 Pratik Patel. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="index.html#home">Home</a>
+                    <a href="index.html#about">About</a>
+                    <a href="index.html#skills">Skills</a>
+                    <a href="index.html#achievements">Achievements</a>
+                    <a href="index.html#projects">Projects</a>
+                    <a href="index.html#testimonials">Testimonials</a>
+                    <a href="index.html#contact">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Project data (same as in script.js)
+        const projects = {
+            1: {
+                title: 'E-Commerce Platform',
+                tech: ['Angular', 'TypeScript', 'Node.js', 'MongoDB', 'Stripe', 'JWT'],
+                description: 'A comprehensive full-stack e-commerce platform built with modern technologies. Features include user authentication, product catalog management, shopping cart functionality, secure payment processing, order management, and admin dashboard.',
+                features: [
+                    'User registration and authentication with JWT',
+                    'Product catalog with search and filtering',
+                    'Shopping cart with persistent storage',
+                    'Secure payment processing with Stripe integration',
+                    'Order history and tracking',
+                    'Admin dashboard for inventory management',
+                    'Responsive design for all devices',
+                    'Real-time inventory updates'
+                ],
+                github: '#',
+                live: '#'
+            },
+            2: {
+                title: 'Task Management App',
+                tech: ['React', 'Redux', 'Express.js', 'PostgreSQL', 'Socket.io', 'Material-UI'],
+                description: 'A collaborative task management application designed for teams to organize, track, and complete projects efficiently. Includes real-time updates, team collaboration features, and comprehensive project analytics.',
+                features: [
+                    'Real-time collaboration with Socket.io',
+                    'Drag-and-drop task organization',
+                    'Team member assignment and permissions',
+                    'Project timeline and milestone tracking',
+                    'File attachment and commenting system',
+                    'Progress analytics and reporting',
+                    'Email notifications and reminders',
+                    'Mobile-responsive design'
+                ],
+                github: '#',
+                live: '#'
+            }
+        };
+
+        // Get project ID from URL parameter
+        function getProjectIdFromURL() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get('id');
+        }
+
+        // Load and display project details
+        function loadProjectDetails() {
+            const projectId = getProjectIdFromURL();
+            const projectContent = document.getElementById('projectContent');
+
+            if (!projectId || !projects[projectId]) {
+                projectContent.innerHTML = `
+                    <div class="error-state">
+                        <h2>Project Not Found</h2>
+                        <p>The project you're looking for doesn't exist.</p>
+                        <a href="index.html#projects" class="back-button" style="margin-top: 20px;">
+                            <i class="fas fa-arrow-left"></i>
+                            Back to Projects
+                        </a>
+                    </div>
+                `;
+                return;
+            }
+
+            const project = projects[projectId];
+
+            projectContent.innerHTML = `
+                <div class="project-details-card">
+                    <div class="project-details-header">
+                        <h1>${project.title}</h1>
+                        <div class="project-tech-tags">
+                            ${project.tech.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
+                        </div>
+                    </div>
+                    <div class="project-details-body">
+                        <p class="project-description">${project.description}</p>
+                        
+                        <div class="project-features">
+                            <h2>Key Features</h2>
+                            <ul>
+                                ${project.features.map(feature => `<li>${feature}</li>`).join('')}
+                            </ul>
+                        </div>
+
+                        <div class="project-links">
+                            <a href="${project.github}" target="_blank" class="project-link">
+                                <i class="fab fa-github"></i>
+                                View Code
+                            </a>
+                            <a href="${project.live}" target="_blank" class="project-link secondary">
+                                <i class="fas fa-external-link-alt"></i>
+                                Live Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', () => {
+            loadProjectDetails();
+        });
+    </script>
+</body>
+</html>
+

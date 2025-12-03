@@ -41,6 +41,9 @@ body {
     color: var(--text-primary);
     background-color: var(--bg-color);
     transition: background-color 0.3s ease, color 0.3s ease;
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100%;
 }
 
 .container {
@@ -181,6 +184,14 @@ body {
 
 /* Mobile Navigation Styles */
 @media (max-width: 768px) {
+    .nav-menu {
+        display: none !important;
+    }
+
+    .hamburger {
+        display: flex !important;
+    }
+
     .nav-menu.active {
         display: flex !important;
         position: fixed;
@@ -238,6 +249,13 @@ body {
 
     .hamburger.active .bar:nth-child(3) {
         transform: rotate(45deg) translate(-5px, -6px);
+    }
+}
+
+@media (max-width: 650px) {
+    .nav-menu.active a {
+        font-size: 1.2rem;
+        padding: 12px 25px;
     }
 }
 
@@ -457,6 +475,22 @@ body {
     gap: 30px;
 }
 
+/* Show 3 skills per line for screens between 651px and 900px */
+@media (min-width: 651px) and (max-width: 900px) {
+    .skills-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 25px;
+    }
+}
+
+/* Show 4 skills per line for screens above 900px */
+@media (min-width: 901px) {
+    .skills-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 30px;
+    }
+}
+
 .skill-card {
     background-color: var(--card-bg);
     padding: 30px;
@@ -541,6 +575,7 @@ body {
     height: 100%;
     object-fit: cover;
     transition: transform 0.3s ease;
+    display: block;
 }
 
 .project-card:hover .project-image img {
@@ -626,6 +661,30 @@ body {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 30px;
+}
+
+/* Show 1 achievement per line for screens below 300px */
+@media (max-width: 300px) {
+    .achievements-grid {
+        grid-template-columns: 1fr !important;
+        gap: 15px;
+    }
+}
+
+/* Show 2 achievements per line for screens between 301px and 600px */
+@media (min-width: 301px) and (max-width: 600px) {
+    .achievements-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 15px;
+    }
+}
+
+/* Show 3 achievements per line for screens from 601px and above */
+@media (min-width: 601px) {
+    .achievements-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 25px;
+    }
 }
 
 .achievement-card {
@@ -1139,6 +1198,7 @@ body {
 
     .hero-buttons {
         justify-content: center;
+        flex-wrap: wrap;
     }
 
     .nav-menu {
@@ -1148,7 +1208,6 @@ body {
     .hamburger {
         display: flex !important;
     }
-}
 
     .about-content {
         grid-template-columns: 1fr;
@@ -1214,7 +1273,7 @@ body {
     }
 
     .achievements-grid {
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        grid-template-columns: 1fr !important;
     }
 
     .achievement-card {
@@ -1247,24 +1306,294 @@ body {
         font-size: 0.95rem;
     }
 
-    .modal-content {
-        width: 95%;
-        margin: 10% auto;
+    .theme-toggle {
+        top: 75px;
+        right: 15px;
+        width: 45px;
+        height: 45px;
+        font-size: 16px;
     }
 
-    .modal-body {
-        padding: 20px;
+    .hero-image {
+        margin-top: 20px;
     }
 
-    .modal-links {
+    .profile-placeholder {
+        width: 200px;
+        height: 200px;
+    }
+
+    .profile-placeholder i {
+        font-size: 80px;
+    }
+
+    .project-overlay {
+        opacity: 1;
+        background: rgba(59, 130, 246, 0.9);
+    }
+
+    .project-links {
         flex-direction: column;
+        gap: 12px;
+        width: 85%;
+        max-width: 280px;
     }
 
-    .modal-links a {
+    .project-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 12px 20px;
+        font-size: 0.9rem;
+    }
+
+    .hero-buttons .btn {
+        width: 100%;
+        max-width: 280px;
+    }
+}
+
+/* Specific breakpoint for 650px and below */
+@media (max-width: 650px) {
+    html {
+        overflow-x: hidden;
+    }
+
+    body {
+        overflow-x: hidden;
+        width: 100%;
+    }
+
+    .hero-container {
+        grid-template-columns: 1fr;
         text-align: center;
+        gap: 25px;
+        padding: 0 15px;
     }
-/* } */
 
+    .hero-title {
+        font-size: 2.2rem;
+        word-wrap: break-word;
+    }
+
+    .hero-subtitle {
+        font-size: 1.2rem;
+    }
+
+    .hero-description {
+        font-size: 1rem;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        width: 100%;
+    }
+
+    .hero-buttons .btn {
+        width: 100%;
+        max-width: 300px;
+        box-sizing: border-box;
+    }
+
+    .about-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .about-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .skills-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+    }
+
+    /* Reduce padding on skill cards for 3 columns layout */
+    .skill-card {
+        padding: 20px 12px;
+    }
+
+    .skill-icon {
+        width: 55px;
+        height: 55px;
+        font-size: 22px;
+        margin-bottom: 15px;
+    }
+
+    .skill-card h3 {
+        font-size: 1.1rem;
+    }
+
+    .skill-card p {
+        font-size: 0.85rem;
+    }
+
+    .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .project-card {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* Achievements grid: 2 columns only below 600px, handled by specific breakpoint */
+    .achievement-card {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        padding: 20px 15px;
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+    }
+
+    .achievement-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+    }
+
+    .achievement-content h3 {
+        font-size: 1.1rem;
+    }
+
+    .achievement-content p {
+        font-size: 0.85rem;
+    }
+
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .testimonial-card {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        width: 100%;
+    }
+
+    .btn-large {
+        width: 100%;
+        max-width: 300px;
+        box-sizing: border-box;
+    }
+
+    .cta-stats {
+        flex-direction: column;
+        gap: 25px;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+
+    .footer-links {
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+    }
+
+    .section-header h2 {
+        font-size: 1.9rem;
+        word-wrap: break-word;
+    }
+
+    .container {
+        padding: 0 15px;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    .nav-container {
+        padding: 0 15px;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    .project-overlay {
+        opacity: 1;
+    }
+
+    .project-links {
+        flex-direction: column;
+        width: 90%;
+        max-width: 300px;
+    }
+
+    .project-btn {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .theme-toggle {
+        right: 10px;
+    }
+
+    .nav-brand h2 {
+        font-size: 1.3rem;
+    }
+
+    .hero {
+        padding: 100px 0 60px;
+        width: 100%;
+        overflow-x: hidden;
+    }
+
+    .about,
+    .skills,
+    .achievements,
+    .projects,
+    .testimonials,
+    .contact,
+    .cta {
+        width: 100%;
+        overflow-x: hidden;
+    }
+
+    .profile-placeholder {
+        width: 180px;
+        height: 180px;
+    }
+
+    .profile-placeholder i {
+        font-size: 70px;
+    }
+
+    .social-links {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+}
+
+/* Breakpoint for screens between 440px and 480px - show 3 skills per line */
 @media (max-width: 480px) {
     .hero-title {
         font-size: 1.8rem;
@@ -1279,10 +1608,123 @@ body {
         font-size: 0.95rem;
     }
 
+    /* Show 3 columns for skills grid between 440px and 480px */
     .skills-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
     }
+
+    /* Achievements grid: 2 columns only below 600px, handled by specific breakpoint */
+
+    /* Reduce padding on skill cards for smaller screens to fit 3 columns */
+    .skill-card {
+        padding: 20px 10px;
+    }
+
+    .skill-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+        margin-bottom: 15px;
+    }
+
+    .skill-card h3 {
+        font-size: 1rem;
+    }
+
+    .skill-card p {
+        font-size: 0.8rem;
+    }
+
+    /* Reduce padding on achievement cards for smaller screens to fit 3 columns */
+    .achievement-card {
+        padding: 18px 10px;
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+
+    .achievement-icon {
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
+    }
+
+    .achievement-content h3 {
+        font-size: 0.95rem;
+    }
+
+    .achievement-content p {
+        font-size: 0.75rem;
+    }
+}
+
+/* Breakpoint for screens between 301px and 440px - show 2 skills per line */
+@media (min-width: 301px) and (max-width: 440px) {
+    .skills-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12px;
+    }
+
+    /* Show 2 columns for achievements grid between 301px and 440px */
+    .achievements-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12px;
+    }
+
+    .skill-card {
+        padding: 20px 15px;
+    }
+
+    .skill-icon {
+        width: 55px;
+        height: 55px;
+        font-size: 22px;
+        margin-bottom: 15px;
+    }
+
+    .skill-card h3 {
+        font-size: 1.1rem;
+    }
+
+    .skill-card p {
+        font-size: 0.85rem;
+    }
+
+    .achievement-card {
+        padding: 20px 15px;
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+    }
+
+    .achievement-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+    }
+
+    .achievement-content h3 {
+        font-size: 1rem;
+    }
+
+    .achievement-content p {
+        font-size: 0.8rem;
+    }
+}
+
+/* Breakpoint for very small screens (below 300px) - show 1 skill and 1 certification per line */
+@media (max-width: 300px) {
+    .skills-grid {
+        grid-template-columns: 1fr !important;
+        gap: 15px;
+    }
+
+    .achievements-grid {
+        grid-template-columns: 1fr !important;
+        gap: 15px;
+    }
+}
 
     .social-links {
         justify-content: center;
@@ -1296,9 +1738,10 @@ body {
     }
 
     .btn {
-        width: 160px;
-        padding: 10px 15px;
-        font-size: 0.8rem;
+        width: 100%;
+        max-width: 280px;
+        padding: 12px 20px;
+        font-size: 0.9rem;
     }
 
     .cta-content h2 {
@@ -1314,13 +1757,15 @@ body {
     }
 
     .btn-large {
-        width: 200px;
-        padding: 12px 24px;
+        width: 100%;
+        max-width: 280px;
+        padding: 14px 28px;
         font-size: 1rem;
     }
 
     .cta-stats {
         gap: 20px;
+        flex-direction: column;
     }
 
     .stat-number {
@@ -1328,11 +1773,11 @@ body {
     }
 
     .container {
-        padding: 0 10px;
+        padding: 0 15px;
     }
 
     .nav-container {
-        padding: 0 10px;
+        padding: 0 15px;
     }
 
     .section-header {
@@ -1412,8 +1857,122 @@ body {
 
     .form-group input,
     .form-group textarea {
-        padding: 10px 12px;
-        font-size: 0.9rem;
+        padding: 12px 15px;
+        font-size: 0.95rem;
+    }
+
+    .theme-toggle {
+        top: 70px;
+        right: 10px;
+        width: 40px;
+        height: 40px;
+        font-size: 14px;
+    }
+
+    .hero {
+        padding: 100px 0 60px;
+    }
+
+    .about-stats {
+        grid-template-columns: 1fr;
+    }
+
+    /* Achievements grid handled by specific breakpoints (100-600px: 2 cols, 601px+: 3 cols) */
+
+    .achievement-card {
+        padding: 20px 15px;
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+    }
+
+    .achievement-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+    }
+
+    .achievement-content h3 {
+        font-size: 1.1rem;
+    }
+
+    .achievement-content p {
+        font-size: 0.85rem;
+    }
+
+    .project-image {
+        height: 180px;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .project-image img {
+        width: 100%;
+        max-width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    .hero-container {
+        padding: 0 15px;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    .about-content {
+        gap: 30px;
+    }
+
+    .contact-content {
+        gap: 30px;
+    }
+
+    .projects-grid {
+        gap: 30px;
+    }
+
+    .achievements-grid {
+        gap: 20px;
+    }
+
+    .testimonials-grid {
+        gap: 20px;
+    }
+
+    .skills-grid {
+        gap: 15px;
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    * {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+
+    section {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    .modal-header h2 {
+        font-size: 1.5rem;
+    }
+
+    .modal-tech {
+        gap: 8px;
+    }
+
+    .tech-tag {
+        font-size: 0.75rem;
+        padding: 4px 10px;
     }
 }
 

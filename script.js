@@ -201,114 +201,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Project Modal Functionality
-const modal = document.getElementById('projectModal');
-const modalContent = document.getElementById('modalContent');
-const closeModal = document.querySelector('.close-modal');
-
-// Project data
-const projects = {
-    1: {
-        title: 'E-Commerce Platform',
-        tech: ['Angular', 'TypeScript', 'Node.js', 'MongoDB', 'Stripe', 'JWT'],
-        description: 'A comprehensive full-stack e-commerce platform built with modern technologies. Features include user authentication, product catalog management, shopping cart functionality, secure payment processing, order management, and admin dashboard.',
-        features: [
-            'User registration and authentication with JWT',
-            'Product catalog with search and filtering',
-            'Shopping cart with persistent storage',
-            'Secure payment processing with Stripe integration',
-            'Order history and tracking',
-            'Admin dashboard for inventory management',
-            'Responsive design for all devices',
-            'Real-time inventory updates'
-        ],
-        github: '#',
-        live: '#'
-    },
-    2: {
-        title: 'Task Management App',
-        tech: ['React', 'Redux', 'Express.js', 'PostgreSQL', 'Socket.io', 'Material-UI'],
-        description: 'A collaborative task management application designed for teams to organize, track, and complete projects efficiently. Includes real-time updates, team collaboration features, and comprehensive project analytics.',
-        features: [
-            'Real-time collaboration with Socket.io',
-            'Drag-and-drop task organization',
-            'Team member assignment and permissions',
-            'Project timeline and milestone tracking',
-            'File attachment and commenting system',
-            'Progress analytics and reporting',
-            'Email notifications and reminders',
-            'Mobile-responsive design'
-        ],
-        github: '#',
-        live: '#'
-    }
-};
-
-// Open modal with project details
-function openProjectModal(projectId) {
-    const project = projects[projectId];
-    if (!project) return;
-
-    modalContent.innerHTML = `
-        <div class="modal-header">
-            <h2>${project.title}</h2>
-            <div class="modal-tech">
-                ${project.tech.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
-            </div>
-        </div>
-        <div class="modal-body">
-            <p class="modal-description">${project.description}</p>
-
-            <div class="modal-features">
-                <h3>Key Features</h3>
-                <ul>
-                    ${project.features.map(feature => `<li>${feature}</li>`).join('')}
-                </ul>
-            </div>
-
-            <div class="modal-links">
-                <a href="${project.github}" target="_blank">
-                    <i class="fab fa-github"></i> View Code
-                </a>
-                <a href="${project.live}" target="_blank">
-                    <i class="fas fa-external-link-alt"></i> Live Demo
-                </a>
-            </div>
-        </div>
-    `;
-
-    modal.style.display = 'block';
-    document.body.style.overflow = 'hidden'; // Prevent background scrolling
-}
-
-// Close modal
-function closeProjectModal() {
-    modal.style.display = 'none';
-    document.body.style.overflow = 'auto'; // Restore scrolling
-}
-
-// Event listeners for project buttons
+// Navigate to project details page
 document.addEventListener('click', (e) => {
-    if (e.target.classList.contains('view-details')) {
-        const projectId = e.target.getAttribute('data-project');
-        openProjectModal(projectId);
-    }
-});
-
-// Close modal when clicking the close button
-closeModal.addEventListener('click', closeProjectModal);
-
-// Close modal when clicking outside
-window.addEventListener('click', (e) => {
-    if (e.target === modal) {
-        closeProjectModal();
-    }
-});
-
-// Close modal with Escape key
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal.style.display === 'block') {
-        closeProjectModal();
+    if (e.target.classList.contains('view-details') || e.target.closest('.view-details')) {
+        e.preventDefault();
+        const button = e.target.classList.contains('view-details') ? e.target : e.target.closest('.view-details');
+        const projectId = button.getAttribute('data-project');
+        if (projectId) {
+            window.location.href = `project-details.html?id=${projectId}`;
+        }
     }
 });
 
