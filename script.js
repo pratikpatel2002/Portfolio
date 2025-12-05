@@ -206,11 +206,53 @@ document.addEventListener('click', (e) => {
     if (e.target.classList.contains('view-details') || e.target.closest('.view-details')) {
         e.preventDefault();
         const button = e.target.classList.contains('view-details') ? e.target : e.target.closest('.view-details');
+        const projectCard = button.closest('.project-card');
         const projectId = button.getAttribute('data-project');
+        
+        // Remove hover state by blurring the card
+        if (projectCard) {
+            projectCard.blur();
+            // Force remove any active states
+            projectCard.style.transform = '';
+            projectCard.style.boxShadow = '';
+        }
+        
         if (projectId) {
             window.location.href = `project-details.html?id=${projectId}`;
         }
     }
+});
+
+// Ensure hover states are properly removed when mouse leaves
+document.querySelectorAll('.project-card').forEach(card => {
+    card.addEventListener('mouseleave', () => {
+        // Reset any transform or shadow that might persist
+        card.style.transform = '';
+        card.style.boxShadow = '';
+        card.classList.remove('touch-active');
+    });
+    
+    // Remove hover state when clicking on buttons
+    const buttons = card.querySelectorAll('.project-btn');
+    buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            card.blur();
+            card.style.transform = '';
+            card.style.boxShadow = '';
+            card.classList.remove('touch-active');
+        });
+    });
+    
+    // Handle touch events for mobile
+    card.addEventListener('touchstart', () => {
+        card.classList.add('touch-active');
+    });
+    
+    card.addEventListener('touchend', () => {
+        setTimeout(() => {
+            card.classList.remove('touch-active');
+        }, 300);
+    });
 });
 
 // Add parallax effect to hero section (subtle)
